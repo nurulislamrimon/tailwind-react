@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import Datas from './Components/datas/Datas';
+import { MenuIcon, XIcon } from '@heroicons/react/solid'
+import { useState } from 'react';
+
 
 function App() {
+  const [open, setOpen] = useState(false);
+  const datas = [
+    { name: "Hello", num: 1 },
+    { name: "gelo", num: 2 },
+    { name: "bolo", num: 3 },
+    { name: "lolo", num: 4 },
+    { name: "bulo", num: 5 },
+  ]
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <div onClick={() => setOpen(!open)} className='w-6 md:hidden'>
+        {open ? <XIcon></XIcon> : <MenuIcon></MenuIcon>}
+      </div>
+
+      <ul className={`md:flex justify-center absolute duration-500 ease-in ${open ? "top-6" : "top-[-150px]"}`}>
+        {datas.map(data => <Datas data={data} key={data.num}></Datas>)}
+      </ul>
     </div>
   );
 }
